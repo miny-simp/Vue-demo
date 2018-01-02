@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>绑定 HTML Class - 绑定内联样式</title>
+    <style type="text/css">
+    #classObjectExample p {
+      color: #111111;
+    }
+    #classObjectExample p.isActive {
+      color: #0ba53c;
+    }
+    #classObjectExample p.text-danger {
+      color: #ff0000;
+    }
+    </style>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+<p>1、语法对象</p>
+<div id="classObjectExample">
+  <p v-blind:class="{classObject}">class改变属性</p>
+</div>
+
+<p></p>
+
+<p>2、数组语法</p>
+<div v-bind:class="[{ active: isActive }, errorClass]"></div>
+
+<p></p>
+<p></p>
+
+<p>绑定内联样式</p>
+<div id="styleObjectExample">
+  <p v-bind:style="styleObject"></p>
+</div>
+
+<p></p>
+
+<p>数组语法</p>
+<div v-bind:style="[baseStyles, overridingStyles]"></div>
+
+<script type="text/javascript">
+    //这是一个常用且强大的模式,绑定一个返回对象的计算属性
+    var classObjectExample = new Vue ({
+      el: '#classObjectExample',
+      data: {
+        isActive: true,
+        error: null
+      },
+      computed: {
+        classObject: function () {
+          return {
+            active: this.isActive && !this.error,
+            'text-danger': this.error && this.error.type === 'fatal'
+          }
+        }
+      }
+    })
+
+    var styleObjectExample = new Vue({
+      el: '#styleObjectExample',
+      data: {
+        styleObject: {
+          color: 'red',
+          fontSize: '13px'
+        }
+      }
+    })
+</script>
+</body>
+</html>

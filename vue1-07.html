@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+</head>
+<body>
+<h4> 用 v-for 把一个数组对应为一组元素 </h4>
+<ul id="example-1">
+  <li v-for="item in items">
+    {{ item.message }}
+  </li>
+</ul>
+
+<p></p>
+
+<p>在 v-for 块中，我们拥有对父作用域属性的完全访问权限。v-for 还支持一个可选的第二个参数为当前项的索引。</p>
+<ul id="example-2">
+  <li v-for="(item,index) in items">
+    {{ parentMessage }} - {{ index }} - {{ item.message }}
+  </li>
+</ul>
+<p>【你也可以用 of 替代 in 作为分隔符，因为它是最接近 JavaScript 迭代器的语法】</p>
+
+<p></p>
+
+<h4>一个对象的 v-for</h4>
+<ul id="v-for-object">
+  <li v-for="value in object">
+    {{ value }}
+  </li>
+</ul>
+<p>第二个参数为键名，第三个参数为索引</p>
+<div id="v-for-object2">
+  <ul v-for="(value, key, index) in object">
+    {{ index }}. {{ key }} : {{value}}
+  </ul>
+</div>
+
+<script type="text/javascript">
+
+var example1 = new Vue({
+  el: '#example-1',
+  data: {
+    items: [
+      { message: 'Foo' },
+      { message: 'Bar' }
+    ]
+  }
+})
+
+var example2 = new Vue({
+  el: '#example-2',
+  data: {
+    parentMessage: 'Parent',
+    items: [
+      { message: 'Foo' },
+      { message: 'Bar' }
+    ]
+  }
+})
+
+var example3 = new Vue({
+  el: '#v-for-object',
+  data: {
+    object: {
+      firstName: 'John',
+      lastName: 'Doe',
+      age: 30
+    }
+  }
+})
+
+var example4 = new Vue({
+  el: '#v-for-object2',
+  data: {
+    object: {
+      firstName: 'John',
+      lastName: 'Doe',
+      age: 30
+    }
+  }
+})
+</script>
+</body>
+</html>
